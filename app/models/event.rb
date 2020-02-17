@@ -3,11 +3,11 @@ has_many :attendances
 has_many :users, through: :attendances
 validates :start_date,
     presence: true
-validate: event_must_be_in_the_future
+validate :event_must_be_in_the_future
 validates :duration, 
     numericality: { grater_than: 0 },
     presence: true
-validate: duration_must_be_multiple_of_five
+validate :duration_must_be_multiple_of_five
 validates :title,
   length: { in: 5..140 },
   presence: true
@@ -15,8 +15,7 @@ validates :description,
   presence: true,
   length: { in: 20..1000 }
 validates :price,
-  numericality: { grater_than: 0 },
-  numericality: { less_than: 1001 },
+  numericality: { grater_than: 0, less_than: 1001 },
   presence: true
 validates :location,
   presence: true
